@@ -8,7 +8,6 @@ describe('The postgres connection will', () => {
 	const user = 'pguser';
 	const db = 'trustflight';
 	const password = 'pgpass';
-	const failedToThrow = 'failedToThrow';
 	const validUserId = 1;
 	const invalidUserId = 10;
 	const validUserName = 'bsmith';
@@ -40,7 +39,7 @@ describe('The postgres connection will', () => {
 		const userService = new UserService(dbConn);
 		try {
 			await userService.getUserById(invalidUserId);
-			throw new Error(failedToThrow);
+			fail();
 		} catch (e) {
 			expect(e.message).toBe(notFoundError);
 		}
@@ -52,7 +51,7 @@ describe('The postgres connection will', () => {
 		const userService = new UserService(dbConn);
 		try {
 			await userService.getUserById(invalidUserId);
-			throw new Error(failedToThrow);
+			fail();
 		} catch (e) {
 			expect(e.message).toBe(badAddress);
 		}

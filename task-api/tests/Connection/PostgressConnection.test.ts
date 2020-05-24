@@ -7,7 +7,6 @@ describe('The postgres connection will', () => {
 	const user = 'pguser';
 	const db = 'trustflight';
 	const password = 'pgpass';
-	const failedToThrow = 'failedToThrow';
 	const badAddress = `getaddrinfo ENOTFOUND ${invalidHost}`;
 	const validQueryOneResult = 'select * from public.user where email = $1';
 	const validParamsOneResult = ['Bob@smith.comm'];
@@ -45,7 +44,7 @@ describe('The postgres connection will', () => {
 		const connn = new PostgresConnection();
 		try {
 			await connn.runQuery(validQueryAllResult);
-			throw new Error(failedToThrow);
+			fail();
 		} catch (e) {
 			expect(e.message).toBe(badAddress);
 		}
