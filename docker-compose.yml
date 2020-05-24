@@ -13,3 +13,9 @@ services:
       - 5432:5432
     volumes:
       - '/var/lib/postgresql/data'
+  db-seed:
+    build: ./db-seed/
+    env_file:
+      - .env
+    depends_on:
+      - postgres
