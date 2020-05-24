@@ -1,4 +1,5 @@
 import PostgresConnection from '../../src/Connection/PostgressConnection';
+import { setUp, tearDown } from '../Fixtures/UserFixture';
 
 describe('The postgres connection will', () => {
 	const host = 'localhost';
@@ -14,16 +15,14 @@ describe('The postgres connection will', () => {
 	const validQueryAllResult = 'select * from public.user';
 	const validQueryAllResultCount = 2;
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		process.env.DB_USER = user;
 		process.env.DB_HOST = host;
 		process.env.DB_PASSWORD = password;
 		process.env.DB_DATABASE = db;
-		/**
-		 * Normally I would setup and tear down,
-		 * for the connection, data exists from
-		 * db-seed.
-		 */
+		// Due to db seeding, always teardown first.
+		await tearDown();
+		await setUp();
 	});
 
 	it('Will provide query access to the database', async () => {
