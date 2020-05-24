@@ -1,0 +1,19 @@
+{
+	"dependencies": {
+		"@types/jest": "^25.2.3",
+		"@types/node": "^14.0.5",
+		"@types/pg": "^7.14.3",
+		"jest": "^26.0.1",
+		"pg": "^8.2.1",
+		"ts-jest": "^26.0.0",
+		"typescript": "^3.9.3"
+	},
+	"scripts": {
+		"test": "./node_modules/.bin/jest",
+		"coverage": "./node_modules/.bin/jest --coverage"
+	},
+	"name": "task-api",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT"
+}
