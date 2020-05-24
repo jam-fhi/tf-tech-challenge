@@ -18,7 +18,7 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-	return knex('contact')
+	return knex('user')
 		.where('email', 'Bob@smith.comm')
 		.orWhere('email', 'mary@jones.comm')
 		.del();
