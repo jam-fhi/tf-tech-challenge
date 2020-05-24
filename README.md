@@ -4,6 +4,7 @@
 
 - Commited .env to repo, to make it each to run. Normally I would not do this.
 - Used docker compose as an easy way to share system config.
+- Went for an invesion of control pattern on the api, mostly because its such a small service, dependency inject would not be a massive step up from the way the system is setup though.
 
 ## Using the system
 
