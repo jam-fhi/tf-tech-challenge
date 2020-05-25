@@ -13,7 +13,7 @@ export default class TaskService {
 		this.dbConn = dbConn;
 	}
 
-	async getAllTasks() {
+	async getAllTasks(): Promise<Array<Task>> {
 		const allTasks = await this.dbConn.runQuery(
 			'select tasks.id, tasks.taskname, tasks.userid from public.tasks'
 		);
