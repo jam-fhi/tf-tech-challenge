@@ -13,12 +13,14 @@
 		"jest": "^26.0.1",
 		"multer": "^1.4.2",
 		"pg": "^8.2.1",
+		"pm2": "^4.4.0",
 		"superagent": "^5.2.2",
 		"swagger-jsdoc": "^4.0.0",
 		"ts-jest": "^26.0.0",
 		"typescript": "^3.9.3"
 	},
 	"scripts": {
+		"start": "tsc -p src && pm2 start app/index.js --watch && pm2 log",
 		"test": "./node_modules/.bin/jest --runInBand",
 		"coverage": "./node_modules/.bin/jest --coverage",
 		"swagger": "./node_modules/.bin/swagger-jsdoc -d swagger/swaggerDef.js -o swagger/swagger.json"

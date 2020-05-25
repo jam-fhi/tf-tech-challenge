@@ -3,7 +3,7 @@
 		"target": "es5",
 		"module": "commonjs",
 		"declaration": true,
-		"outDir": "./app",
+		"outDir": "../app",
 		"strict": true,
 		"noImplicitAny": true,
 		"strictNullChecks": true,
@@ -13,7 +13,9 @@
 		"noUnusedLocals": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"inlineSources": true,
+		"inlineSourceMap": true
 	},
 	"exclude": ["node_modules", "lib"]
 }
