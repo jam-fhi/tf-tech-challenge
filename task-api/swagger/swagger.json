@@ -73,6 +73,41 @@
           }
         }
       }
+    },
+    "/add_task": {
+      "post": {
+        "description": "Adds a task to the system",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "The id of the user",
+            "in": "formData",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "taskName",
+            "description": "The name of the task",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task added to the system"
+          },
+          "500": {
+            "description": "Error when adding the task to the system"
+          }
+        }
+      }
     }
   },
   "definitions": {},

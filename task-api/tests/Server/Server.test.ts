@@ -9,8 +9,10 @@ import {
 	ALL_USERS,
 	USER,
 	ALL_TASKS,
+	ADD_TASK,
 } from '../../src/models/RouteConstants';
 import TaskService from '../../src/Services/TaskService';
+import httpStatusCodes from 'http-status-codes';
 
 describe('The server', () => {
 	const apiHost = 'http://localhost';
@@ -24,6 +26,15 @@ describe('The server', () => {
 	const validUsername = 'bsmith';
 	const connectFailError = 'connect ECONNREFUSED 127.0.0.1:3002';
 	const internalServerError = 'Internal Server Error';
+	const validTaskName = 'The flight deck needs rotating';
+	const newTaskCount = 3;
+	const newTask = {
+		userId: validUserId,
+		taskName: validTaskName,
+	};
+	const badNewTask = {
+		taskName: validTaskName,
+	};
 
 	let dbConn: PostgresConnection;
 	let userService: UserService;
@@ -128,6 +139,27 @@ describe('The server', () => {
 		await clearTasks();
 		try {
 			await superagent.get(`${apiHost}:${port}/${BASE}/${ALL_TASKS}`);
+		} catch (e) {
+			expect(e.message).toBe(internalServerError);
+		}
+	});
+
+	it('Will add a new task into the system', async () => {
+		const result = await superagent
+			.post(`${apiHost}:${port}/${BASE}/${ADD_TASK}`)
+			.send(newTask);
+		expect(result.status).toBe(httpStatusCodes.OK);
+		const allTasks = await superagent.get(
+			`${apiHost}:${port}/${BASE}/${ALL_TASKS}`
+		);
+		expect(allTasks.body.length).toBe(newTaskCount);
+	});
+
+	it('Will fail to add a task with a bad data structure', async () => {
+		try {
+			await superagent
+				.post(`${apiHost}:${port}/${BASE}/${ADD_TASK}`)
+				.send(badNewTask);
 		} catch (e) {
 			expect(e.message).toBe(internalServerError);
 		}

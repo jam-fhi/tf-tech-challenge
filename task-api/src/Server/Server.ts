@@ -1,11 +1,18 @@
 import express from 'express';
 import { SERVER_COPY } from '../models/DisplayCopyConstants';
-import { BASE, ALL_USERS, USER, ALL_TASKS } from '../models/RouteConstants';
+import {
+	BASE,
+	ALL_USERS,
+	USER,
+	ALL_TASKS,
+	ADD_TASK,
+} from '../models/RouteConstants';
 import cors from 'cors';
 import UserService, { User } from '../Services/UserService';
 import { Server } from 'http';
 import httpStatusCodes from 'http-status-codes';
 import TaskService, { Task } from '../Services/TaskService';
+import multer from 'multer';
 
 export default class TaskServer {
 	private activeServer?: Server;
@@ -27,6 +34,7 @@ export default class TaskServer {
 	}
 
 	private buildAPI() {
+		const upload = multer();
 		/**
 		 * @swagger
 		 *
@@ -111,6 +119,48 @@ export default class TaskServer {
 				return res.sendStatus(httpStatusCodes.INTERNAL_SERVER_ERROR);
 			}
 		});
+
+		/**
+		 * @swagger
+		 *
+		 * /add_task:
+		 *   post:
+		 *     description: Adds a task to the system
+		 *     produces:
+		 *       - application/json
+		 *     consumes:
+		 *       - multipart/form-data
+		 *     parameters:
+		 *       - name: userId
+		 *         description: The id of the user
+		 *         in: formData
+		 *         required: true
+		 *         type: integer
+		 *       - name: taskName
+		 *         description: The name of the task
+		 *         in: formData
+		 *         required: true
+		 *         type: string
+		 *     responses:
+		 *       200:
+		 *         description: Task added to the system
+		 *       500:
+		 *         description: Error when adding the task to the system
+		 */
+		this.server.post(
+			`/${BASE}/${ADD_TASK}`,
+			upload.none(),
+			async (req, res) => {
+				try {
+					const userId: number = req.body.userId;
+					const taskName: string = req.body.taskName;
+					await this.taskService.addTask(taskName, userId);
+					return res.sendStatus(httpStatusCodes.OK);
+				} catch (e) {
+					return res.sendStatus(httpStatusCodes.INTERNAL_SERVER_ERROR);
+				}
+			}
+		);
 	}
 
 	startServer(port: number) {
