@@ -4,6 +4,11 @@
 
 - Commited .env to repo, to make it each to run. Normally I would not do this.
 - Used docker compose as an easy way to share system config.
+- Went for an invesion of control pattern on the api, mostly because its such a small service, dependency inject would not be a massive step up from the way the system is setup though.
+- Added swager editor and generation from comments, not the cleanest way but can be improved with dependency injection as this would allow the controller end points to be better organised in files.
+- While the original technical challenge asked for data models, I've gone for typescript interfaces in the api but something like knex as a query build with bookshelf as an orm would be easy to implement to use actual data models. For the scope of this challenge I believe that typescript interfaces are suitable.
+- For the purposes of this technical challenge I've limited all error handling to 500 internal server error, normally I would be more selective in what error codes are returned from an api and for what purposes.
+- The api is compiled from typescript when the docker image is built, for code changes run `tsc -p src` from the task-api directory
 
 ## Using the system
 
@@ -26,6 +31,18 @@ If not running detached:
 Then
 
 `docker-compose down`
+
+### Tests
+
+To run desks, ensure the docker-compose system is up and running then:
+
+`cd task-api`
+
+`yarn run test`
+
+or
+
+`yarn run coverage`
 
 ## Viewing the database
 

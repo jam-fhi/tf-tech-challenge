@@ -19,3 +19,18 @@ services:
       - .env
     depends_on:
       - postgres
+  swagger:
+    image: swaggerapi/swagger-editor
+    ports:
+      - '3080:8080'
+  task_api:
+    build: ./task-api/
+    volumes:
+      - ./task-api:/usr/app
+      - '/usr/app/node_modules'
+    ports:
+      - 3001:3001
+    env_file:
+      - .env
+    depends_on:
+      - db-seed

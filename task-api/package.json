@@ -1,0 +1,32 @@
+{
+	"dependencies": {
+		"@types/cors": "^2.8.6",
+		"@types/express": "^4.17.6",
+		"@types/jest": "^25.2.3",
+		"@types/multer": "^1.4.3",
+		"@types/node": "^14.0.5",
+		"@types/pg": "^7.14.3",
+		"@types/superagent": "^4.1.7",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"http-status-codes": "^1.4.0",
+		"jest": "^26.0.1",
+		"multer": "^1.4.2",
+		"pg": "^8.2.1",
+		"pm2": "^4.4.0",
+		"superagent": "^5.2.2",
+		"swagger-jsdoc": "^4.0.0",
+		"ts-jest": "^26.0.0",
+		"typescript": "^3.9.3"
+	},
+	"scripts": {
+		"start": "tsc -p src && pm2 start app/index.js --watch && pm2 log",
+		"test": "./node_modules/.bin/jest --runInBand",
+		"coverage": "./node_modules/.bin/jest --coverage",
+		"swagger": "./node_modules/.bin/swagger-jsdoc -d swagger/swaggerDef.js -o swagger/swagger.json"
+	},
+	"name": "task-api",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT"
+}

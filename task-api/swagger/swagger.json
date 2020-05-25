@@ -1,0 +1,118 @@
+{
+  "info": {
+    "title": "TrustFLight Task Manager!",
+    "version": "1.0.0",
+    "description": "Technical Challenge for Trust Flight"
+  },
+  "host": "localhost:3001",
+  "basePath": "/api",
+  "swagger": "2.0",
+  "paths": {
+    "/user": {
+      "get": {
+        "description": "Gets a user by id number",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "userid",
+            "description": "The id of the user",
+            "in": "query",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "all users returned"
+          },
+          "500": {
+            "description": "an error occured when getting the users"
+          }
+        }
+      }
+    },
+    "/all_users": {
+      "get": {
+        "description": "Gets all users in the system",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain; charset=utf-8"
+        ],
+        "responses": {
+          "200": {
+            "description": "all users returned"
+          },
+          "500": {
+            "description": "an error occured when getting all users"
+          }
+        }
+      }
+    },
+    "/all_tasks": {
+      "get": {
+        "description": "Gets all tasks in the system",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain; charset=utf-8"
+        ],
+        "responses": {
+          "200": {
+            "description": "all tasks returned"
+          },
+          "500": {
+            "description": "an error occured when getting all tasks"
+          }
+        }
+      }
+    },
+    "/add_task": {
+      "post": {
+        "description": "Adds a task to the system",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "The id of the user",
+            "in": "formData",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "taskName",
+            "description": "The name of the task",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task added to the system"
+          },
+          "500": {
+            "description": "Error when adding the task to the system"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {},
+  "tags": []
+}
