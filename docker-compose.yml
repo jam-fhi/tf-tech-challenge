@@ -19,3 +19,7 @@ services:
       - .env
     depends_on:
       - postgres
+  swagger:
+    image: swaggerapi/swagger-editor
+    ports:
+      - '3080:8080'
