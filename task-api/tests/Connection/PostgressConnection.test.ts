@@ -1,5 +1,5 @@
 import PostgresConnection from '../../src/Connection/PostgressConnection';
-import { setUp, tearDown } from '../Fixtures/UserFixture';
+import { setUpUser, tearDownUser } from '../Fixtures/UserFixture';
 
 describe('The postgres connection will', () => {
 	const host = 'localhost';
@@ -20,8 +20,8 @@ describe('The postgres connection will', () => {
 		process.env.DB_PASSWORD = password;
 		process.env.DB_DATABASE = db;
 		// Due to db seeding, always teardown first.
-		await tearDown();
-		await setUp();
+		await tearDownUser();
+		await setUpUser();
 	});
 
 	it('Will provide query access to the database', async () => {

@@ -1,6 +1,6 @@
 import PostgresConnection from '../../src/Connection/PostgressConnection';
 import UserService from '../../src/Services/UserService';
-import { setUp, tearDown, clearUsers } from '../Fixtures/UserFixture';
+import { setUpUser, tearDownUser, clearUsers } from '../Fixtures/UserFixture';
 
 describe('The postgres connection will', () => {
 	const host = 'localhost';
@@ -25,8 +25,8 @@ describe('The postgres connection will', () => {
 		process.env.DB_DATABASE = db;
 		dbConn = new PostgresConnection();
 		// Due to db seeding, always teardown first.
-		await tearDown();
-		await setUp();
+		await tearDownUser();
+		await setUpUser();
 	});
 
 	it('Will find a user based on id number', async () => {

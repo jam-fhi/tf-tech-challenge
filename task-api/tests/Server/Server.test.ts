@@ -1,6 +1,7 @@
 import PostgresConnection from '../../src/Connection/PostgressConnection';
 import UserService from '../../src/Services/UserService';
-import { setUp, tearDown, clearUsers } from '../Fixtures/UserFixture';
+import { setUpUser, tearDownUser, clearUsers } from '../Fixtures/UserFixture';
+import { setUpTask, tearDownTask, clearTasks } from '../Fixtures/TaskFixture';
 import TaskServer from '../../src/Server/Server';
 import superagent from 'superagent';
 import { BASE, ALL_USERS, USER } from '../../src/models/RouteConstants';
@@ -28,8 +29,10 @@ describe('The server', () => {
 		process.env.DB_PASSWORD = password;
 		process.env.DB_DATABASE = db;
 		// Due to db seeding, always teardown first.
-		await tearDown();
-		await setUp();
+		await tearDownUser();
+		await setUpUser();
+		await tearDownTask();
+		await setUpTask();
 		dbConn = new PostgresConnection();
 		userService = new UserService(dbConn);
 		taskServer = new TaskServer(userService);

@@ -1,6 +1,6 @@
 import PostgresConnection from '../../src/Connection/PostgressConnection';
-import TaskService from '../../src/Services/TaskService';
-import { setUp, tearDown, clearTasks } from '../Fixtures/TaskFixture';
+import TaskService, { Task } from '../../src/Services/TaskService';
+import { setUpTask, tearDownTask, clearTasks } from '../Fixtures/TaskFixture';
 
 describe('The postgres connection will', () => {
 	const host = 'localhost';
@@ -11,6 +11,7 @@ describe('The postgres connection will', () => {
 	const validTaskCount = 2;
 	const validNewTaskCount = 3;
 	const validTaskName = 'Check The Right Wing';
+	const validExistingTaskName = 'Check the left wing';
 	const validUserId = 2;
 	const notFoundError = 'No Results';
 	const badAddress = `getaddrinfo ENOTFOUND ${invalidHost}`;
@@ -24,14 +25,15 @@ describe('The postgres connection will', () => {
 		process.env.DB_DATABASE = db;
 		dbConn = new PostgresConnection();
 		// Due to db seeding, always teardown first.
-		await tearDown();
-		await setUp();
+		await tearDownTask();
+		await setUpTask();
 	});
 
 	it('Will get all tasks in the database', async () => {
 		const taskService = new TaskService(dbConn);
-		const result = await taskService.getAllTasks();
+		const result: Array<Task> = await taskService.getAllTasks();
 		expect(result.length).toBe(validTaskCount);
+		expect(result[1].taskName).toBe(validExistingTaskName);
 	});
 
 	it('Will not get any tasks without data existing', async () => {

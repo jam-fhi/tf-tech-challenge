@@ -1,6 +1,6 @@
 import { Client } from 'pg';
 
-export async function tearDown() {
+export async function tearDownTask() {
 	process.env.PGUSER = 'pguser';
 	process.env.PGHOST = 'localhost';
 	process.env.PGPASSWORD = 'pgpass';
@@ -29,7 +29,7 @@ export async function clearTasks() {
 	await conn.end();
 }
 
-export async function setUp() {
+export async function setUpTask() {
 	process.env.PGUSER = 'pguser';
 	process.env.PGHOST = 'localhost';
 	process.env.PGPASSWORD = 'pgpass';
