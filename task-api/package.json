@@ -14,7 +14,7 @@
 		"typescript": "^3.9.3"
 	},
 	"scripts": {
-		"test": "./node_modules/.bin/jest",
+		"test": "./node_modules/.bin/jest --runInBand",
 		"coverage": "./node_modules/.bin/jest --coverage",
 		"swagger": "./node_modules/.bin/swagger-jsdoc -d swagger/swaggerDef.js -o swagger/swagger.json"
 	},
