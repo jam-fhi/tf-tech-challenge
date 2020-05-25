@@ -1,0 +1,33 @@
+{
+  "info": {
+    "title": "TrustFLight Task Manager!",
+    "version": "1.0.0",
+    "description": "Technical Challenge for Trust Flight"
+  },
+  "host": "localhost:3001",
+  "basePath": "/api",
+  "swagger": "2.0",
+  "paths": {
+    "/all_users": {
+      "get": {
+        "description": "Gets all users in the system",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "200": {
+            "description": "all users returned"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {},
+  "tags": []
+}
