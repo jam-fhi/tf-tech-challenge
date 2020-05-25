@@ -1,6 +1,6 @@
 import PostgresConnection from '../Connection/PostgressConnection';
 
-interface User {
+export interface User {
 	first_name: string;
 	last_name: string;
 	email: string;

@@ -1,8 +1,8 @@
 import express from 'express';
 import { SERVER_COPY } from '../models/DisplayCopyConstants';
-import { BASE, ALL_USERS } from '../models/RouteConstants';
+import { BASE, ALL_USERS, USER } from '../models/RouteConstants';
 import cors from 'cors';
-import UserService from '../Services/UserService';
+import UserService, { User } from '../Services/UserService';
 import { Server } from 'http';
 import httpStatusCodes from 'http-status-codes';
 
@@ -27,6 +27,41 @@ export default class TaskServer {
 		/**
 		 * @swagger
 		 *
+		 * /user:
+		 *   get:
+		 *     description: Gets a user by id number
+		 *     produces:
+		 *       - application/json
+		 *     consumes:
+		 *       - text/plain; charset=utf-8
+		 *     parameters:
+		 *       - name: userid
+		 *         description: The id of the user
+		 *         in: query
+		 *         required: true
+		 *         type: integer
+		 *     responses:
+		 *       200:
+		 *         description: all users returned
+		 *       500:
+		 *         description: an error occured when getting the users
+		 */
+		this.server.get(`/${BASE}/${USER}`, async (req, res) => {
+			try {
+				if (req.query.userid) {
+					const userId: number = parseInt(req.query.userid.toString());
+					const user: User = await this.userService.getUserById(userId);
+					return res.json(user);
+				}
+				throw new Error('Parameter Problem');
+			} catch (e) {
+				return res.sendStatus(httpStatusCodes.INTERNAL_SERVER_ERROR);
+			}
+		});
+
+		/**
+		 * @swagger
+		 *
 		 * /all_users:
 		 *   get:
 		 *     description: Gets all users in the system
@@ -37,12 +72,12 @@ export default class TaskServer {
 		 *     responses:
 		 *       200:
 		 *         description: all users returned
-		         500:
+		 *       500:
 		 *         description: an error occured when getting all users
 		 */
 		this.server.get(`/${BASE}/${ALL_USERS}`, async (req, res) => {
 			try {
-				const users = await this.userService.getAllUsers();
+				const users: Array<User> = await this.userService.getAllUsers();
 				return res.json(users);
 			} catch (e) {
 				return res.sendStatus(httpStatusCodes.INTERNAL_SERVER_ERROR);

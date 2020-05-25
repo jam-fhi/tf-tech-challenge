@@ -8,8 +8,33 @@
   "basePath": "/api",
   "swagger": "2.0",
   "paths": {
-    "500": {
-      "description": "an error occured when getting all users"
+    "/user": {
+      "get": {
+        "description": "Gets a user by id number",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "userid",
+            "description": "The id of the user",
+            "in": "query",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "all users returned"
+          },
+          "500": {
+            "description": "an error occured when getting the users"
+          }
+        }
+      }
     },
     "/all_users": {
       "get": {
@@ -23,6 +48,9 @@
         "responses": {
           "200": {
             "description": "all users returned"
+          },
+          "500": {
+            "description": "an error occured when getting all users"
           }
         }
       }

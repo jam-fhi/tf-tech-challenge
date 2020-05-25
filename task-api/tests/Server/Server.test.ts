@@ -3,7 +3,7 @@ import UserService from '../../src/Services/UserService';
 import { setUp, tearDown, clearUsers } from '../Fixtures/UserFixture';
 import TaskServer from '../../src/Server/Server';
 import superagent from 'superagent';
-import { BASE, ALL_USERS } from '../../src/models/RouteConstants';
+import { BASE, ALL_USERS, USER } from '../../src/models/RouteConstants';
 
 describe('The server', () => {
 	const apiHost = 'http://localhost';
@@ -12,6 +12,9 @@ describe('The server', () => {
 	const db = 'trustflight';
 	const password = 'pgpass';
 	const port = 3002;
+	const validUserId = 1;
+	const invalidUserId = 10;
+	const validUsername = 'bsmith';
 	const connectFailError = 'connect ECONNREFUSED 127.0.0.1:3002';
 	const internalServerError = 'Internal Server Error';
 
@@ -62,6 +65,44 @@ describe('The server', () => {
 			await superagent.get(`${apiHost}:${port}/${BASE}/${ALL_USERS}`);
 		} catch (e) {
 			expect(e.message).toBe(connectFailError);
+		}
+	});
+
+	it('Will get users with a valid id', async () => {
+		const result = await superagent.get(
+			`${apiHost}:${port}/${BASE}/${USER}?userid=${validUserId}`
+		);
+		expect(result.body.username).toBe(validUsername);
+	});
+
+	it('Will fail to get users with a valid id', async () => {
+		clearUsers();
+		try {
+			await superagent.get(
+				`${apiHost}:${port}/${BASE}/${USER}?userid=${validUserId}`
+			);
+		} catch (e) {
+			expect(e.message).toBe(internalServerError);
+		}
+	});
+
+	it('Will fail to get users an invalid user id', async () => {
+		clearUsers();
+		try {
+			await superagent.get(
+				`${apiHost}:${port}/${BASE}/${USER}?userid=${invalidUserId}`
+			);
+		} catch (e) {
+			expect(e.message).toBe(internalServerError);
+		}
+	});
+
+	it('Will fail to get users with no userid query', async () => {
+		clearUsers();
+		try {
+			await superagent.get(`${apiHost}:${port}/${BASE}/${USER}`);
+		} catch (e) {
+			expect(e.message).toBe(internalServerError);
 		}
 	});
 });
