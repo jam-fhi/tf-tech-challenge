@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`The server Will get all tasks in the system 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "taskName": "Make a cup of tea",
+    "userid": 1,
+  },
+  Object {
+    "id": 2,
+    "taskName": "Check the left wing",
+    "userid": 2,
+  },
+]
+`;
+
 exports[`The server Will get all users in the system 1`] = `
 Array [
   Object {

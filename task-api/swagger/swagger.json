@@ -54,6 +54,25 @@
           }
         }
       }
+    },
+    "/all_tasks": {
+      "get": {
+        "description": "Gets all tasks in the system",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain; charset=utf-8"
+        ],
+        "responses": {
+          "200": {
+            "description": "all tasks returned"
+          },
+          "500": {
+            "description": "an error occured when getting all tasks"
+          }
+        }
+      }
     }
   },
   "definitions": {},

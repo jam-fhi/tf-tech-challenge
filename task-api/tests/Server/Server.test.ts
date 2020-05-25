@@ -4,7 +4,13 @@ import { setUpUser, tearDownUser, clearUsers } from '../Fixtures/UserFixture';
 import { setUpTask, tearDownTask, clearTasks } from '../Fixtures/TaskFixture';
 import TaskServer from '../../src/Server/Server';
 import superagent from 'superagent';
-import { BASE, ALL_USERS, USER } from '../../src/models/RouteConstants';
+import {
+	BASE,
+	ALL_USERS,
+	USER,
+	ALL_TASKS,
+} from '../../src/models/RouteConstants';
+import TaskService from '../../src/Services/TaskService';
 
 describe('The server', () => {
 	const apiHost = 'http://localhost';
@@ -21,6 +27,7 @@ describe('The server', () => {
 
 	let dbConn: PostgresConnection;
 	let userService: UserService;
+	let taskService: TaskService;
 	let taskServer: TaskServer;
 
 	beforeEach(async () => {
@@ -35,7 +42,8 @@ describe('The server', () => {
 		await setUpTask();
 		dbConn = new PostgresConnection();
 		userService = new UserService(dbConn);
-		taskServer = new TaskServer(userService);
+		taskService = new TaskService(dbConn);
+		taskServer = new TaskServer(userService, taskService);
 		taskServer.startServer(port);
 	});
 
@@ -104,6 +112,22 @@ describe('The server', () => {
 		clearUsers();
 		try {
 			await superagent.get(`${apiHost}:${port}/${BASE}/${USER}`);
+		} catch (e) {
+			expect(e.message).toBe(internalServerError);
+		}
+	});
+
+	it('Will get all tasks in the system', async () => {
+		const result = await superagent.get(
+			`${apiHost}:${port}/${BASE}/${ALL_TASKS}`
+		);
+		expect(result.body).toMatchSnapshot();
+	});
+
+	it('Will throw an error when there are no tasks', async () => {
+		await clearTasks();
+		try {
+			await superagent.get(`${apiHost}:${port}/${BASE}/${ALL_TASKS}`);
 		} catch (e) {
 			expect(e.message).toBe(internalServerError);
 		}

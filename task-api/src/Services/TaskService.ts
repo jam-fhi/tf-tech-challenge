@@ -1,6 +1,6 @@
 import PostgresConnection from '../Connection/PostgressConnection';
 
-interface Task {
+export interface Task {
 	id: number;
 	taskName: string;
 	userid: number;
@@ -21,8 +21,8 @@ export default class TaskService {
 			throw new Error('No Results');
 		}
 
-		const resultTasks = allTasks.rows.map((task) => {
-			return this.buildTask(task.id, task.taskName, task.userid);
+		const resultTasks: Array<Task> = allTasks.rows.map((task) => {
+			return this.buildTask(task.id, task.taskname, task.userid);
 		});
 		return resultTasks;
 	}
