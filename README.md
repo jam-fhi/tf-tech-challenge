@@ -7,6 +7,7 @@
 - Went for an invesion of control pattern on the api, mostly because its such a small service, dependency inject would not be a massive step up from the way the system is setup though.
 - Added swager editor and generation from comments, not the cleanest way but can be improved with dependency injection as this would allow the controller end points to be better organised in files.
 - While the original technical challenge asked for data models, I've gone for typescript interfaces in the api but something like knex as a query build with bookshelf as an orm would be easy to implement to use actual data models. For the scope of this challenge I believe that typescript interfaces are suitable.
+- For the purposes of this technical challenge I've limited all error handling to 500 internal server error, normally I would be more selective in what error codes are returned from an api and for what purposes.
 
 ## Using the system
 
