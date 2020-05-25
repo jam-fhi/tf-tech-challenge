@@ -8,6 +8,9 @@
   "basePath": "/api",
   "swagger": "2.0",
   "paths": {
+    "500": {
+      "description": "an error occured when getting all users"
+    },
     "/all_users": {
       "get": {
         "description": "Gets all users in the system",
@@ -15,7 +18,7 @@
           "application/json"
         ],
         "consumes": [
-          "multipart/form-data"
+          "text/plain; charset=utf-8"
         ],
         "responses": {
           "200": {

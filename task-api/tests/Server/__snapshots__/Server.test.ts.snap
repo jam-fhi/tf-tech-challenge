@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The server Will get all users in the system 1`] = `
+Array [
+  Object {
+    "email": "Bob@smith.comm",
+    "first_name": "Bob",
+    "id": 1,
+    "last_name": "Smith",
+    "username": "bsmith",
+  },
+  Object {
+    "email": "mary@jones.comm",
+    "first_name": "Mary",
+    "id": 2,
+    "last_name": "Jones",
+    "username": "mjones",
+  },
+]
+`;
