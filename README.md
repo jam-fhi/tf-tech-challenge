@@ -9,6 +9,7 @@
 - While the original technical challenge asked for data models, I've gone for typescript interfaces in the api but something like knex as a query build with bookshelf as an orm would be easy to implement to use actual data models. For the scope of this challenge I believe that typescript interfaces are suitable.
 - For the purposes of this technical challenge I've limited all error handling to 500 internal server error, normally I would be more selective in what error codes are returned from an api and for what purposes.
 - The api is compiled from typescript when the docker image is built, for code changes run `tsc -p src` from the task-api directory
+- When building unit tests for the front end, I ran into a problem with create-react-app / typescript / jest mocks not working, which meant I was not able to test the main App component. In a production setting I would have setup webpack but felt that I had already spent a lot of time on this project that create-react-app would have been sufficient to demonstrate a front end implementation.
 
 ## Using the system
 
