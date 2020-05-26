@@ -10,7 +10,6 @@ RUN yarn install
 
 COPY public/ ./public/
 COPY src/ ./src/
-COPY index.js ./
 
 EXPOSE 3000
 
