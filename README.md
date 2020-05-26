@@ -44,6 +44,16 @@ or
 
 `yarn run coverage`
 
+### Swagger Editor
+
+You can access swagger editor at `http://localhost:3080` please note to use `http` as it does put `https` onto the api call url and the api server is not running `https`.
+
+### Front End
+
+The front end can be accessed from `http://localhost:3000`
+
+React development tools are running within docker to rebuild and lint front end code changes.
+
 ## Viewing the database
 
 I used pgAdmin locally on my Mac. I know some companies like to include database viewers within the project however I think its better to keep support tools, like database viewers or ide's to a local development environment so I've not added this to docker-compose.
