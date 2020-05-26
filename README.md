@@ -39,6 +39,8 @@ To run desks, ensure the docker-compose system is up and running then:
 
 `cd task-api`
 
+`cd front-end`
+
 `yarn run test`
 
 or
