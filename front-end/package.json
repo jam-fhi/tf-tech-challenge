@@ -10,15 +10,14 @@
 		"@types/node": "^12.0.0",
 		"@types/react": "^16.9.0",
 		"@types/react-dom": "^16.9.0",
-		"concurrently": "^5.2.0",
-		"pm2": "^4.4.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-scripts": "3.4.1",
+		"ts-jest": "^26.0.0",
 		"typescript": "~3.7.2"
 	},
 	"scripts": {
-		"start": "concurrently \"./node_modules/.bin/react-scripts start\" \"pm2 index.js\"",
+		"start": "./node_modules/.bin/react-scripts start",
 		"build": "./node_modules/.bin/react-scripts build",
 		"test": "./node_modules/.bin/react-scripts test",
 		"eject": "./node_modules/.bin/react-scripts eject"

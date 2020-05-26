@@ -46,3 +46,4 @@ services:
       - PORT=${CLIENT_PORT}
     depends_on:
       - task_api
+    stdin_open: true
