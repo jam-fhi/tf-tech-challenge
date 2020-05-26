@@ -6,13 +6,17 @@ export default function AllTasks(props: any) {
 		<div>
 			<p>All Tasks</p>
 			<div>
-				{props.allTasks.map((task: any) => (
-					<Task
-						key={task.id}
-						username={task.username}
-						taskname={task.taskName}
-					/>
-				))}
+				{props.allTasks.map((task: any) => {
+					if (task) {
+						return (
+							<Task
+								key={task.id}
+								username={task.username}
+								taskname={task.taskName}
+							/>
+						);
+					}
+				})}
 			</div>
 		</div>
 	);
